@@ -6,12 +6,14 @@ This world tests an agents ability to memorize.
 The world is initalized with numberOfInputs and valueRange.
 brains have (numberOfInputs + 1) inputs and (numberOfInputs) outputs.
 the extra input is the "program bit"
+
 On the first update and then every 10th update after that, the program bit is set to 1
 and the other numberOfInputs inputs are random values in valueRange.
 On the remaining updates, the program bit is off and the remainder of the inputs
 are 80% of the time the inital value for that input, and 20% of the time a new random number.
-Agents outputs corrilate with the inputs, (one input for each output). Agents recive score
+Agents have one output for each inputs. Agents recive score
 for correclty indicating if the input matches the inital (output 1) or does not match (output 0).
+
 Correctly guessing when the values match provides 1/2 the fitness of correcly guessing
 that the values do not match. Scores are normalized to 1. countCorrectTrue and
 countCorrectFalse report the rate at which the agent correctly reports that correct
