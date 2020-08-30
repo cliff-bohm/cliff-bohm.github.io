@@ -14,8 +14,9 @@ Agents have one output for each inputs. Agents recive score
 for correclty indicating if the input matches the inital (output 1) or does not match (output 0).
 
 Correctly guessing when the values match provides 1/2 the fitness of correcly guessing
-that the values do not match. Scores are normalized to 1. countCorrectTrue and
-countCorrectFalse report the rate at which the agent correctly reports that correct
+that the values do not match. Scores are normalized to 1.
+
+'countCorrectTrue' and 'countCorrectFalse' report the rate at which the agent correctly reports that correct
 when values match and when values do not match.
 
 When Memorize World is run, agents tend to output all 1 early in evolution and then "learn" over time to
