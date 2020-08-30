@@ -3,28 +3,55 @@
 
 
 ## PathFollowWorld
- agents are tested to see if they can follow a path.
- maps are loaded where locations are either off path, forward, left, right, or goal
- agents start on one end of the path (indicated by the map) facing the correct direction
- agents have a down sensor that allows them to see the value on the current location
+agents are tested to see if they can follow a path.
+maps are loaded where locations are either off path, forward, left, right, or goal
+agents start on one end of the path (indicated by the map) facing the correct direction
+agents have a down sensor that allows them to see the value on the current location
 
- agents have 3 outputs where 100 = left, 010 = right, 110 = forward, XX1 = reverse (X = 0 or 1)
+agents have 3 outputs where 100 = left, 010 = right, 110 = forward, XX1 = reverse (X = 0 or 1)
 
- parameters can be used to alter input formatting and other aspects of world.
+## Score
+score in PathFollowWorld is number of forward and turn locations visited + time left if goal is reached and all locations were visited
+NOTE: since turns are interaly converted to forwards when visted, agents actually only recive points for being on forwards.
 
- Parameters Notes (not in parameter descriptions):
+## Parameters
+
+parameters can be used to alter input formatting and other aspects of world.
+from settings_world.cfg:
+
+```
+% WORLD_PATHFOLLOW
+  addFlippedMaps = 1                         #(bool) if addFlippedMaps, than a copy of each loaded map flipped horizontaly will be added to the maps list
+  clearVisted = 1                            #(bool) if clearVisted is true, then world markers will be erased when a location is occupied and visting this location
+                                             #  again will incure the emptySpace cost.
+                                             #  note that map values > 1, i.e. turn signals and end of map signal are set to 1 (forward signal) when visted to provide
+                                             #  time to take a turn action.
+  emptySpaceCost = 0.25                      #(double) score lost anytime agent is on an empty location (including non-empty locations that become empty)
+  evaluationsPerGeneration = 1000               #(int) how many times should each organism be tested in each generation?
+  extraSteps = 50                            #(int) how many many steps, beyond those needed to perfectly solve the map, does the agent get to solve each map?
+  inputMode = binary                         #(string) how are inputs delived from world to organism?single: 1 input : -1 (off), 0(forward), or [1, signValueMax](turn
+                                             #  symbol)
+                                             #  mixed:  4 inputs: offPathBit,onPathBit,(0(not turn), or [1,signValueMax](turn symbol))
+                                             #  binary: 3+ inputs: offPathBit,onPathBit,onTurnBit, bits for turn symbol(0 if not turn)
+  mapNames = path1.txt,path2.txt,path3.txt,path4.txt,path5.txt,path6.txt,path7.txt,path8.txt #(string) list of text files with paths. in path files, 0 = empty,
+                                             #  1 = forward path, 2 = turn right, 3 = turn right, 4 = end of path
+  swapSymbolsAfter = 1.0                     #(double) if swapSignals, than the turn symbols will be swapped after (minimum number of steps * swapSignalsAfter)
+  symbolValueMax = 7                       #(int) number of symbols that will be used when generating turn symbols. range is [1,signValueMax]if inputMode is binary,
+                                             #  it is best if this value is a power of 2 minus 1
+  useRandomTurnSymbols = 1                   #(bool) if true, random symbols will be determined per map (and per eval) for left and right.
+                                             #  symbols will be the same for all agents in a generation.
+                                             #  if false, symbolValueMax is ignored and 1 and 2 are always used
+```
+
+## Parameters Notes (not in parameter descriptions):
    - if 'useRandomTurnSymbols' values are selected per generation per map,
        all agents will see same symbols per map)
    - if 'evaluationsPerGeneration' > 1, new symbols are generated for each evaluation
    - if symbol is delivered as binary, then not turn will be represented by 0.
        if symbolValueMax = 3, 3 symbols will be used with 2 bits (i.e. 01,10,11)
- if symbolValueMax = 4, 4 symbols will be used with 3 bits (i.e. 001,010,011,100)
+       if symbolValueMax = 4, 4 symbols will be used with 3 bits (i.e. 001,010,011,100)
 
- score in PathFollowWorld is number of forward and turn locations visited + time left if goal is reached and all locations were visited
- NOTE: since turns are interaly converted to forwards when visted, agents actually only recive points for being on forwards.
-
-
-
+## Map Files
 map files are raw text files with the following rules
 the first line of the file is the map size (x,y)
 the second line of the file is inital facing direction for the agent
