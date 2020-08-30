@@ -1,5 +1,35 @@
 "# cliff-bohm.github.io" 
 
+## Memorize World
+
+This world tests an agents ability to memorize.
+The world is initalized with numberOfInputs and valueRange.
+brains have (numberOfInputs + 1) inputs and (numberOfInputs) outputs.
+the extra input is the "program bit"
+On the first update and then every 10th update after that, the program bit is set to 1
+and the other numberOfInputs inputs are random values in valueRange.
+On the remaining updates, the program bit is off and the remainder of the inputs
+are 80% of the time the inital value for that input, and 20% of the time a new random number.
+Agents outputs corrilate with the inputs, (one input for each output). Agents recive score
+for correclty indicating if the input matches the inital (output 1) or does not match (output 0).
+Correctly guessing when the values match provides 1/2 the fitness of correcly guessing
+that the values do not match. Scores are normalized to 1. countCorrectTrue and
+countCorrectFalse report the rate at which the agent correctly reports that correct
+when values match and when values do not match.
+
+When Memorize World is run, agents tend to output all 1 early in evolution and then "learn" over time to
+correctly respond to miss-matches.
+
+## Parameters
+```
+% WORLD_MEMORIZE
+  evaluationsPerGeneration = 1               #(int) Number of times to evaluate each Genome per generation (useful with non-deterministic brains)
+  numberOfInputs = 10                        #(int) number of inputs the agent be asked to remember per evaluation
+  valueRange = -100,100                      #(string) inclusive range of values agent will be asked to analyze
+```
+
+
+
 
 
 ## PathFollowWorld
