@@ -23,6 +23,7 @@ when values match and when values do not match.
 When Memorize World is run, agents tend to output all 1 early in evolution and then "learn" over time to
 correctly respond to miss-matches.
 
+
 ## Parameters
 ```
 % WORLD_MEMORIZE
@@ -30,6 +31,7 @@ correctly respond to miss-matches.
   numberOfInputs = 10                        #(int) number of inputs the agent be asked to remember per evaluation
   valueRange = -100,100                      #(string) inclusive range of values agent will be asked to analyze
 ```
+
 
 
 
