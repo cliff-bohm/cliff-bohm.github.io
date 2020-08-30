@@ -21,26 +21,26 @@ from settings_world.cfg:
 
 ```
 % WORLD_PATHFOLLOW
-  addFlippedMaps = 1                         #(bool) if addFlippedMaps, than a copy of each loaded map flipped horizontaly will be added to the maps list
-  clearVisted = 1                            #(bool) if clearVisted is true, then world markers will be erased when a location is occupied and visting this location
+  addFlippedMaps = 0                         #(bool) if addFlippedMaps, than a copy of each loaded map flipped horizontaly will be added to the maps list
+  clearVisted = 0                            #(bool) if clearVisted is true, then world markers will be erased when a location is occupied and visting this location
                                              #  again will incure the emptySpace cost.
                                              #  note that map values > 1, i.e. turn signals and end of map signal are set to 1 (forward signal) when visted to provide
                                              #  time to take a turn action.
   emptySpaceCost = 0.25                      #(double) score lost anytime agent is on an empty location (including non-empty locations that become empty)
-  evaluationsPerGeneration = 1000               #(int) how many times should each organism be tested in each generation?
+  evaluationsPerGeneration = 1               #(int) how many times should each organism be tested in each generation?
   extraSteps = 50                            #(int) how many many steps, beyond those needed to perfectly solve the map, does the agent get to solve each map?
-  inputMode = binary                         #(string) how are inputs delived from world to organism?single: 1 input : -1 (off), 0(forward), or [1, signValueMax](turn
-                                             #  symbol)
+  inputMode = single                         #(string) how are inputs delived from world to organism?
+                                             #  single: 1 input : -1 (off), 0(forward), or [1, signValueMax](turn symbol)
                                              #  mixed:  4 inputs: offPathBit,onPathBit,(0(not turn), or [1,signValueMax](turn symbol))
                                              #  binary: 3+ inputs: offPathBit,onPathBit,onTurnBit, bits for turn symbol(0 if not turn)
-  mapNames = path1.txt,path2.txt,path3.txt,path4.txt,path5.txt,path6.txt,path7.txt,path8.txt #(string) list of text files with paths. in path files, 0 = empty,
-                                             #  1 = forward path, 2 = turn right, 3 = turn right, 4 = end of path
-  swapSymbolsAfter = 1.0                     #(double) if swapSignals, than the turn symbols will be swapped after (minimum number of steps * swapSignalsAfter)
-  symbolValueMax = 7                       #(int) number of symbols that will be used when generating turn symbols. range is [1,signValueMax]if inputMode is binary,
-                                             #  it is best if this value is a power of 2 minus 1
+  mapNames = path1.txt,path2.txt             #(string) list of text files with paths. in path files, 0 = empty,
+                                             #  X = start position, 1 = forward path, 2 = turn right, 3 = turn right, 4 = end of path
+  swapSymbolsAfter = 1.0                     #(double) if swapSignals < 1.0, than the turn symbols will be swapped after (minimum number of steps * swapSignalsAfter)
+  symbolValueMax = 7                         #(int) number of symbols that will be used when generating turn symbols. range is [1,signValueMax]
+                                             #  if inputMode is binary it is best if this value is a power of 2 minus 1
   useRandomTurnSymbols = 1                   #(bool) if true, random symbols will be determined per map (and per eval) for left and right.
                                              #  symbols will be the same for all agents in a generation.
-                                             #  if false, symbolValueMax is ignored and 1 and 2 are always used
+                                             #  if false, symbolValueMax is ignored and 1 and 2 (or 01 and 10) are always used
 ```
 
 ## Parameters Notes (not in parameter descriptions):
