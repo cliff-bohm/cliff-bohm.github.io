@@ -2,10 +2,9 @@
 
 ## Memorize World
 
-This world tests an agents ability to memorize.
-The world is initalized with numberOfInputs and valueRange.
-brains have (numberOfInputs + 1) inputs and (numberOfInputs) outputs.
-the extra input is the "program bit"
+This world tests an agents ability to memorize 'numberOfInputs' values in 'valueRange'.
+Brains have (numberOfInputs + 1) inputs and (numberOfInputs) outputs.
+The extra input is the "program bit"
 
 On the first update and then every 10th update after that, the program bit is set to 1
 and the other numberOfInputs inputs are random values in valueRange.
